@@ -8,7 +8,7 @@
 
 <div class="container body-content">
 
-    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
 
     <form th:action="@{/search/results}">
         <h2>Search by:</h2>
@@ -42,14 +42,32 @@
 </div>
 
 
+<h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+<div th:if="${jobs} and ${jobs.size()}" th:fragment="jdisplay">
 
-<div th:if="${jobs} and ${jobs.size()}">
 
-    <table th:if="${jobs} and ${jobs.size()}">
-        <tr th:each="item, idx : ${jobs}" th:class="${idx.odd} ? 'odd'">
-
-            <td><a th:href="@{/list/jobs(column=${column},value=${item})}" th:text="${item}"></a></td>
+    <table th:if="${jobs} and ${jobs.size()}" th:each="job : ${jobs}" class="job-listing">
+        <tr>
+            <td><p>Position Type</p></td>
+            <td th:text ="${job['position type']}"></td>
         </tr>
+        <tr>
+            <td><p>Position Name</p></td>
+            <td th:text ="${job.name}"></td>
+        </tr>
+        <tr>
+            <td><p>Location</p></td>
+            <td th:text ="${job.location}"></td>
+        </tr>
+        <tr>
+            <td><p>Employer</p></td>
+            <td th:text ="${job.employer}"></td>
+        </tr>
+        <tr>
+            <td><p>Required Skills</p></td>
+            <td th:text ="${job['core competency']}"></td>
+        </tr>
+        <hr/>
     </table>
 
 </div>
